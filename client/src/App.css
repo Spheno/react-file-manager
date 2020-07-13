@@ -1,39 +1,37 @@
-.App {
-  text-align: center;
+html,
+body {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+#sticky-footer {
+  flex-shrink: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: #007bff;
+  background: linear-gradient(to right, #0062e6, #33aeff);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 50%;
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* File Manager Component */
+
+.card.window {
+  width:85%;
+  background: white;
+  height: 35rem;
+  margin: 20px auto;
 }
 
-.App-link {
-  color: #61dafb;
+.leftSide, .rightSide {
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.leftSide {
+  background: #f5f7f7;
+}
+
+.top {
+  background: #f6f6f6;
+  border-bottom: 1px solid #e0e0e0;
+  height: 3em;
 }
