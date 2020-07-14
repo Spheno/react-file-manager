@@ -1,10 +1,16 @@
 require('dotenv').config()
 
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
+
+// enable files upload
+app.use(fileUpload({
+  parseNested: true
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
