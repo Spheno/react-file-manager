@@ -6,7 +6,7 @@ const pathMD = require("path");
 const config = require("../../config");
 
 module.exports = {
-  getPathContent(req, res, next) {
+  getPathContent(req, res) {
     const { dirPath } = req.query;
 
     var dir = config.configDirectory;
@@ -15,12 +15,19 @@ module.exports = {
     const files = [];
     const folders = [];
 
-    fs.readdirSync(searchPath).forEach((item) => {
-      var itemPath = pathMD.join(searchPath, item);
-      var stat = fs.statSync(itemPath);
-      if (stat.isFile()) files.push(item);
-      else folders.push(item);
-    });
+    try {
+      fs.readdirSync(searchPath).forEach((item) => {
+        var itemPath = pathMD.join(searchPath, item);
+        var stat = fs.statSync(itemPath);
+        if (stat.isFile()) files.push(item);
+        else folders.push(item);
+      });
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(401)
+        .json({ message: "Error while reading path.", error });
+    }
 
     return res.status(200).json({ searchPath, files, folders });
   },
