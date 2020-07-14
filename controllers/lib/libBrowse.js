@@ -9,6 +9,11 @@ module.exports = {
   getPathContent(req, res) {
     const { dirPath } = req.query;
 
+    if (dirPath === undefined) {
+      console.log("dirPath argument is undefined.");
+      return res.status(401).send("dirPath argument is undefined.");
+    }
+
     var dir = config.configDirectory;
     const searchPath = pathMD.join(dir, dirPath);
 

@@ -9,6 +9,11 @@ module.exports = {
   removeFile(req, res, next) {
     const { dirPath } = req.body;
 
+    if (dirPath === undefined) {
+      console.log("dirPath argument is undefined.");
+      return res.status(401).send("dirPath argument is undefined.");
+    }
+
     var dir = config.configDirectory;
     const searchPath = pathMD.join(dir, dirPath);
 
@@ -17,7 +22,8 @@ module.exports = {
 
     if (!isFileExists)
       return res.status(401).json({
-        message: "It's not a file so it can't be removed.",
+        message:
+          "Path doesn't exist or it's not a file so it can't be removed.",
       });
 
     try {
