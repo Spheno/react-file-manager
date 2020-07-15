@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+
 import Spinner from "react-bootstrap/Spinner";
 import browseAPI from "../utils/browseAPI";
 import Folder from "./Folder";
@@ -10,7 +12,6 @@ class RightPanel extends Component {
 
     this.state = {
       loading: true,
-      currentDir: "/",
       files: [],
       folders: [],
     };
@@ -18,8 +19,10 @@ class RightPanel extends Component {
 
   async componentDidMount() {
     try {
-      const data = await browseAPI.getPathContent(this.state.currentDir);
-      console.log(data);
+      let path = this.props.match.url;
+
+      const data = await browseAPI.getPathContent(path);
+      console.log("data", data)
       this.setState({
         files: data.files,
         folders: data.folders,
@@ -30,8 +33,28 @@ class RightPanel extends Component {
     }
   }
 
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.url !== prevProps.match.url) {
+      try {
+        let path = this.props.match.url;
+        console.log("path", path);
+
+        const data = await browseAPI.getPathContent(path);
+        console.log("dataUP", data)
+
+        this.setState({
+          files: data.files,
+          folders: data.folders,
+          loading: false,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   render() {
-    let { loading, currentDir, files, folders } = this.state;
+    let { loading, files, folders } = this.state;
 
     if (loading)
       return (
@@ -43,15 +66,26 @@ class RightPanel extends Component {
       return (
         <div className="col-9 rightSide">
           {folders.map((folder, id) => {
-            return <Folder key={id} folder={folder} currentDir={currentDir} />;
+            return (
+              <Folder
+                key={id}
+                folder={folder}
+              />
+            );
           })}
 
           {files.map((file, id) => {
-            return <FileItem key={id} file={file} currentDir={currentDir} />;
+            return (
+              <FileItem
+                key={id}
+                file={file}
+                currentDir={this.props.match.url}
+              />
+            );
           })}
         </div>
       );
   }
 }
 
-export default RightPanel;
+export default withRouter(RightPanel);

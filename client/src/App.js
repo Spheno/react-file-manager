@@ -1,16 +1,10 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 
 import "./App.css";
 import FileManager from "./components/FileManager";
 
 class App extends Component {
-  state = {};
-
-  componentDidMount() {}
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-  };
 
   render() {
     return (
@@ -33,7 +27,7 @@ class App extends Component {
             </div>
           </div>
 
-          <FileManager />
+          <Route path="/:dirPath?*" component={FileManager} />
 
         </div>
 

@@ -7,14 +7,15 @@ const config = require("../../config");
 
 module.exports = {
   getPathContent(req, res) {
-    const { dirPath } = req.query;
+    let { dirPath } = req.query;
+    var dir = config.configDirectory;
 
     if (dirPath === undefined) {
-      console.log("dirPath argument is undefined.");
-      return res.status(401).send("dirPath argument is undefined.");
+      dirPath = "/";
     }
 
-    var dir = config.configDirectory;
+    console.log("dirPath", dirPath)
+
     const searchPath = pathMD.join(dir, dirPath);
 
     const files = [];

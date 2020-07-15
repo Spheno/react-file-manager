@@ -3,6 +3,6 @@ const router = express.Router();
 
 const browse = require("../controllers/lib/libBrowse");
 
-router.get("/", browse.getPathContent);
+router.get("/:dirPath?", browse.getPathContent);
 
 module.exports = router;
