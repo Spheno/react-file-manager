@@ -6,7 +6,7 @@ const pathMD = require("path");
 const config = require("../../config");
 
 module.exports = {
-  downloadFile(req, res, next) {
+  downloadFile(req, res) {
     const { dirPath } = req.query;
 
     if (dirPath === undefined) {
@@ -26,11 +26,12 @@ module.exports = {
           "Path doesn't exist or it's not a file so it can't be downloaded.",
       });
 
-    res.download(searchPath, pathMD.basename(searchPath));
+    var filename = pathMD.basename(searchPath);
 
-    return res.status(200).json({
-      fileDownloaded: searchPath,
-      message: "File successfully downloaded.",
-    });
+    try {
+      res.download(searchPath, filename);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
