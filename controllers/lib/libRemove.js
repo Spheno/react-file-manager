@@ -6,7 +6,7 @@ const pathMD = require("path");
 const config = require("../../config");
 
 module.exports = {
-  removeFile(req, res, next) {
+  removeFile(req, res) {
     const { dirPath } = req.body;
 
     if (dirPath === undefined) {

@@ -3,6 +3,6 @@ const router = express.Router();
 
 const remove = require("../controllers/lib/libRemove");
 
-router.delete("/", remove.removeFile);
+router.post("/", remove.removeFile);
 
 module.exports = router;

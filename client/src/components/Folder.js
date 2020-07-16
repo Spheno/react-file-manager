@@ -10,7 +10,7 @@ class Folder extends Component {
   render() {
     return (
       <div
-        as="button"
+        role="button"
         className="text-center d-inline-flex mt-2 mr-3 mb-0"
         onClick={() => this.changeDir(this.props.folder)}
       >

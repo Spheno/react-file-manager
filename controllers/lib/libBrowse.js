@@ -14,7 +14,12 @@ module.exports = {
       dirPath = "/";
     }
 
-    console.log("dirPath", dirPath)
+    console.log("dirPath", dirPath);
+
+    //Create config dir in case not found
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
 
     const searchPath = pathMD.join(dir, dirPath);
 

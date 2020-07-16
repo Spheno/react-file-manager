@@ -22,7 +22,7 @@ class RightPanel extends Component {
       let path = this.props.match.url;
 
       const data = await browseAPI.getPathContent(path);
-      console.log("data", data)
+
       this.setState({
         files: data.files,
         folders: data.folders,
@@ -37,10 +37,8 @@ class RightPanel extends Component {
     if (this.props.match.url !== prevProps.match.url) {
       try {
         let path = this.props.match.url;
-        console.log("path", path);
 
         const data = await browseAPI.getPathContent(path);
-        console.log("dataUP", data)
 
         this.setState({
           files: data.files,
@@ -62,16 +60,12 @@ class RightPanel extends Component {
           <Spinner animation="border" />
         </div>
       );
+    else if (files.length === 0 && folders.length === 0) return <h1 className="m-auto font-weight-bolder">Empty</h1>;
     else
       return (
         <div className="col-9 rightSide">
           {folders.map((folder, id) => {
-            return (
-              <Folder
-                key={id}
-                folder={folder}
-              />
-            );
+            return <Folder key={id} folder={folder} />;
           })}
 
           {files.map((file, id) => {
