@@ -4,6 +4,8 @@ import { Route } from "react-router-dom";
 import "./App.css";
 import FileManager from "./components/FileManager";
 
+require('dotenv').config()
+
 class App extends Component {
 
   render() {

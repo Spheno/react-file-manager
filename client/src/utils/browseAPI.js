@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/browse";
+let url = "http://localhost:5000/browse";
+console.log(process.env.REACT_APP_PROD_URL + "/browse")
+if (process.env.NODE_ENV === "production") url = process.env.REACT_APP_PROD_URL + "/browse";
 
 export default {
   getPathContent: async function (path) {

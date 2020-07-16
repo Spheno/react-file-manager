@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/download";
+let url = "http://localhost:5000/download";
+if (process.env.NODE_ENV === "production") url = process.env.REACT_APP_PROD_URL + "/download";
 
 export default {
   downloadFile: async function (path) {
