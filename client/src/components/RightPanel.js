@@ -60,7 +60,8 @@ class RightPanel extends Component {
           <Spinner animation="border" />
         </div>
       );
-    else if (files.length === 0 && folders.length === 0) return <h1 className="m-auto font-weight-bolder">Empty</h1>;
+    else if (files.length === 0 && folders.length === 0)
+      return <h1 className="m-auto font-weight-bolder">Empty</h1>;
     else
       return (
         <div className="col-9 rightSide">
