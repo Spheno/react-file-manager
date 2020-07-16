@@ -9,9 +9,7 @@ const cors = require("cors");
 const app = express();
 
 // enable files upload - form multipart data
-app.use(fileUpload({
-  parseNested: true
-}));
+app.use(fileUpload());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -3,15 +3,18 @@ const fs = require("fs");
 const pathMD = require("path");
 
 const config = require("../../config");
+const { cpuUsage } = require("process");
 
 module.exports = {
   uploadFiles(req, res) {
     const { dirPath } = req.body;
     var dir = config.configDirectory;
 
+    console.log("dirPath upload", dirPath);
+    console.log("files", req.files.uploadForm);
+
     if (dirPath === undefined) {
-      console.log("dirPath argument is undefined.");
-      return res.status(401).send("dirPath argument is undefined.");
+      dirPath = "/";
     }
 
     const searchPath = pathMD.join(dir, dirPath); // path where file(s) should be uploaded
@@ -34,11 +37,17 @@ module.exports = {
     let files = req.files.uploadForm;
 
     // mv() method to place the file somewhere on the server
-    files.map((file) => {
-      file.mv(pathMD.join(searchPath, file.name), function (err) {
+    if (Array.isArray(files))
+      files.map((file) => {
+        file.mv(pathMD.join(searchPath, file.name), function (err) {
+          if (err) return res.status(500).send(err);
+        });
+      });
+    else {
+      files.mv(pathMD.join(searchPath, files.name), function (err) {
         if (err) return res.status(500).send(err);
       });
-    });
+    }
 
     return res.status(200).json({
       uploadPath: searchPath,

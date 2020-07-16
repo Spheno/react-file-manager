@@ -10,8 +10,7 @@ module.exports = {
     const { dirPath } = req.body;
 
     if (dirPath === undefined) {
-      console.log("dirPath argument is undefined.");
-      return res.status(401).send("dirPath argument is undefined.");
+      dirPath = "/";
     }
 
     var dir = config.configDirectory;
