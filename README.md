@@ -4,11 +4,17 @@ In this app, you can browse and interact with the content of a configured direct
 
 # Usage
 
+I deployed the app with Heroku linked with GitHub.
+Check it here:  https://react-nodejs-file-manager.herokuapp.com/
+The problem with this version is that you can't create new folders (for the moment) so you can't go through sub-folders.
+You can still upload, download and remove files from the root directory.
+
+**Manual version**
 In file-manager/ : `npm i && npm start`
 In file-manager/client/: `npm i && npm start`
 
-I also deployed the app with Heroku linked with GitHub.
-Check it here:  https://react-nodejs-file-manager.herokuapp.com/
+With this one, you have access to server files and the configured directory so the creation of subfolders.
+Check next point for more explanation.
 
 # Configuration
 
